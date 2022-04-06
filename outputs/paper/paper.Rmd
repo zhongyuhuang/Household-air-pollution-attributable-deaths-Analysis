@@ -24,8 +24,11 @@ APD <- read.csv(f)
 
 # Introduction
 
- In recent years, extreme pollution events brings people attention on studying on health effect of air pollution. The government of Canada reported that an estimated 15,300 premature deaths are linked to air pollution every year. That is, approximately 5% of the total number of deaths reported in 2020. The health effects of air pollution have been subject to intense study in recent years. Exposure to pollutants such as airborne participate matter and ozone has been associated with increases in mortality and hospital admissions due to respiratory and cardiovascular disease. These effects have been found in short-term studies, which relate day-to-day variations in air pollution and health, and long-term studies, which have followed cohorts of exposed individuals over time.
-
+   In recent years, extreme pollution events bring people's attention to studying the health concerns due to air pollution. The government of Canada reported that an estimated 15,300 premature deaths are linked to air pollution every year (Government of Canada, 2021). That is, approximately 5% of the total number of deaths reported in 2020. Exposure to pollutants such as nitrogen oxides (NOX) or sulfur oxides (SOX) can cause serious health issues including damaging lung function(Government of Canada, 2021). As the main component of smog, fine particulate matter and ground-level ozone (O3) can cause dysfunction of the eye, nose, throat, or lung(Government of Canada, 2021). Fine particulate matter has been identified as one of the risk factors for cardiovascular disease and premature death(Government of Canada, 2021). Other pollutants such as Carbon monoxide (CO) and Ammonia (NH3) are also harmful to human health(Government of Canada, 2021). Most of them are colorless gas to be not noticed. The vulnerable group, children and the elderly, can be harmed more easily at greater risk(Government of Canada, 2021).
+   
+   This paper aims to predict the premature death toll from the composition of PM2.5 emissions from different sources by building a meaningful linear regression model. The data used here are collected by the organization for Economic Co-operation and Development. The dataset stores information about man-made emissions of PM2.5 by different pollutants and the related death toll in Canada from 2005 to 2019 (OECD,2018). We tried to explain the number of death by related factors. With such a model, it should be clear to determine pollutant sources that are significantly related to premature death. It can also be used to provide directions on how to reduce or avoid air pollution, specifically, reduce the emission of PM2.5.
+   
+   Interestingly, the number of death decreased while the total man-made emissions increased in these 13 years. This can be probably explained by the development of medicine. The results have shown that emissions of PM2.5 from agriculture, combustion, and miscellaneous are statistically significantly linearly related to the death resulting from exposures to PM2.5. More specifically, the model can be expressed as - $\text{Premature death} = 7.2419131 + 0.0037454 * \text{Emissions from Agriculture} + (-0.0011323)*\text{Miscellaneous emissions} + 0.0003403* \text{Emissions from Combustion} + \epsilon$. It indicates that a one unit increase in emissions from agriculture would lead to 0.0037454 more death. The unit here for emissions is a thousand tones. It is worth noticing that our model relies on a relatively small dataset which might affect the prediction power of the model. I will introduce the dataset in more detail first, then build and validate the model, and finally discuss the results and limitations.
 
 # Data
 
@@ -33,6 +36,8 @@ Our data is of Air pollution (Figure \@ref(fig:pd)).
 
 ```{r pd, fig.cap="Premature deaths caused by fine particulate matter", echo = FALSE}
 #EDA
+ggplot(data=APD, aes(x=Year, y=Premature.deaths)) +geom_point()
+ggplot(data=APD, aes(x=Year, y=Total.man.made.emissions)) +geom_point()
 
 for(i in 9:18){
 hist(APD[,i], main=paste0("Histogram of ", names(APD)[i]), xlab=names(APD)[i], cex.main=0.75)
