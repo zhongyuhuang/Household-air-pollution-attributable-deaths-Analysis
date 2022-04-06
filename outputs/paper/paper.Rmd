@@ -24,7 +24,7 @@ APD <- read.csv(f)
 
 # Introduction
 
- The government of Canada reported that an estimated 15,300 premature deaths are linked to air pollution every year. That is, approximately 5% of the total number of deaths reported in 2020. The health effects of air pollution have been subject to intense study in recent years. Exposure to pollutants such as airborne participate matter and ozone has been associated with increases in mortality and hospital admissions due to respiratory and cardiovascular disease. These effects have been found in short-term studies, which relate day-to-day variations in air pollution and health, and long-term studies, which have followed cohorts of exposed individuals over time.
+ In recent years, extreme pollution events brings people attention on studying on health effect of air pollution. The government of Canada reported that an estimated 15,300 premature deaths are linked to air pollution every year. That is, approximately 5% of the total number of deaths reported in 2020. The health effects of air pollution have been subject to intense study in recent years. Exposure to pollutants such as airborne participate matter and ozone has been associated with increases in mortality and hospital admissions due to respiratory and cardiovascular disease. These effects have been found in short-term studies, which relate day-to-day variations in air pollution and health, and long-term studies, which have followed cohorts of exposed individuals over time.
 
 
 # Data

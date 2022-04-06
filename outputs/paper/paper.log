@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.4.6)  6 APR 2022 13:26
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.4.6)  6 APR 2022 13:28
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -447,9 +447,10 @@ Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
 ) (c:/Users/Zoey/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/threeparttable/threeparttable.sty
 Package: threeparttable 2003/06/13  v 3.0
 \@tempboxb=\box76
-)
+) (c:/Users/Zoey/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/threeparttablex/threeparttablex.sty
+Package: threeparttablex 2013/07/23 v0.3 by daleif
 
-! LaTeX Error: File `threeparttablex.sty' not found.
+! LaTeX Error: File `environ.sty' not found.
 
 Type X to quit or <RETURN> to proceed,
 or enter new name. (Default extension: sty)
@@ -458,13 +459,13 @@ Enter file name:
 ! Emergency stop.
 <read *> 
          
-l.112 \usepackage
-                 [normalem]{ulem}^^M 
+l.26 ^^M
+         
 Here is how much of TeX's memory you used:
- 14132 strings out of 480228
- 256095 string characters out of 5893579
+ 14152 strings out of 480228
+ 256791 string characters out of 5893579
  521231 words of memory out of 5000000
- 31939 multiletter control sequences out of 15000+600000
+ 31955 multiletter control sequences out of 15000+600000
  472249 words of font info for 29 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  70i,0n,79p,396b,269s stack positions out of 10000i,1000n,20000p,200000b,200000s
