@@ -1,0 +1,16 @@
+﻿COU,Country,POL,Pollutant,VAR,Variable,YEA,Year,Unit Code,Unit,PowerCode Code,PowerCode,Reference Period Code,Reference Period,Total man-made emissions,Road Transport,Other Mobile Sources,Power stations,Combustion,Industrial processes and product use,Miscellaneous,Agriculture,Waste,FemaleD,MaleD,Premature deaths
+CAN,Canada,PM2-5,Particulates (PM2.5),TOT,Total man-made emissions,2005,2005,TONNE,Tonnes,3,Thousands,,,1244.702,26.39,38.992,8.728,120.585,252.912,342.01,451.223,3.862,2380,2792,5172
+CAN,Canada,PM2-5,Particulates (PM2.5),TOT,Total man-made emissions,2006,2006,TONNE,Tonnes,3,Thousands,,,1251.373,24.919,36.158,5.914,110.4,295.558,343.778,431.57,3.076,2293,2678,4972
+CAN,Canada,PM2-5,Particulates (PM2.5),TOT,Total man-made emissions,2007,2007,TONNE,Tonnes,3,Thousands,,,1336.418,23.807,35.865,6.814,122.815,364.694,361.614,417.833,2.978,2188,2574,4762
+CAN,Canada,PM2-5,Particulates (PM2.5),TOT,Total man-made emissions,2008,2008,TONNE,Tonnes,3,Thousands,,,1397.38,22.97,34.649,6.703,120.103,442.899,362.764,404.411,2.882,2063,2425,4488
+CAN,Canada,PM2-5,Particulates (PM2.5),TOT,Total man-made emissions,2009,2009,TONNE,Tonnes,3,Thousands,,,1277.106,21.346,31.994,5.984,118.24,332.77,372.505,391.34,2.929,1930,2262,4192
+CAN,Canada,PM2-5,Particulates (PM2.5),TOT,Total man-made emissions,2010,2010,TONNE,Tonnes,3,Thousands,,,1346.268,21.263,32.985,5.647,106.23,425.506,373.319,378.516,2.803,1821,2133,3954
+CAN,Canada,PM2-5,Particulates (PM2.5),TOT,Total man-made emissions,2011,2011,TONNE,Tonnes,3,Thousands,,,1388.116,20.034,28.66,4.24,108.792,471.516,386.941,365.229,2.704,1748,2024,3772
+CAN,Canada,PM2-5,Particulates (PM2.5),TOT,Total man-made emissions,2012,2012,TONNE,Tonnes,3,Thousands,,,1494.169,18.86,25.492,3.171,102.94,565.133,407.491,368.497,2.586,1683,1965,3647
+CAN,Canada,PM2-5,Particulates (PM2.5),TOT,Total man-made emissions,2013,2013,TONNE,Tonnes,3,Thousands,,,1508.69,18.244,23.963,3.177,109.883,564.502,415.403,370.971,2.547,1632,1905,3537
+CAN,Canada,PM2-5,Particulates (PM2.5),TOT,Total man-made emissions,2014,2014,TONNE,Tonnes,3,Thousands,,,1510.061,16.999,22.219,3.507,109.598,563.059,417.98,374.161,2.538,1617,1884,3500
+CAN,Canada,PM2-5,Particulates (PM2.5),TOT,Total man-made emissions,2015,2015,TONNE,Tonnes,3,Thousands,,,1520.216,15.95,19.561,3.38,104.66,561.094,435.821,377.147,2.604,1611,1882,3493
+CAN,Canada,PM2-5,Particulates (PM2.5),TOT,Total man-made emissions,2016,2016,TONNE,Tonnes,3,Thousands,,,1511.856,15.942,15.933,3.289,97.315,559.62,437.206,379.948,2.603,1642,1932,3574
+CAN,Canada,PM2-5,Particulates (PM2.5),TOT,Total man-made emissions,2017,2017,TONNE,Tonnes,3,Thousands,,,1525.699,16.495,17.097,3.205,97.222,559.786,446.546,382.713,2.635,1674,1981,3655
+CAN,Canada,PM2-5,Particulates (PM2.5),TOT,Total man-made emissions,2018,2018,TONNE,Tonnes,3,Thousands,,,1547.492,17.097,18.132,3.1,99.911,560.085,461.312,385.189,2.666,1725,2065,3790
+CAN,Canada,PM2-5,Particulates (PM2.5),TOT,Total man-made emissions,2019,2019,TONNE,Tonnes,3,Thousands,,,1550.49,17.131,18.066,2.706,99.367,559.2,463.49,387.808,2.722,1710,2055,3765

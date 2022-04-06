@@ -1,0 +1,16 @@
+"","Country","Pollutant","Year","FemaleD","MaleD","Unit","PowerCode","Total man-made emissions","Waste","Agriculture","Miscellaneous","Road Transport","Power stations","Other Mobile Sources","Combustion","Industrial processes and product use","Premature deaths"
+"1","Canada","Particulates (PM2.5)",2005,2380,2792,"Tonnes","Thousands",1244.702,3.862,451.223,342.01,26.39,8.728,38.992,120.585,252.912,5172
+"2","Canada","Particulates (PM2.5)",2006,2293,2678,"Tonnes","Thousands",1251.373,3.076,431.57,343.778,24.919,5.914,36.158,110.4,295.558,4972
+"3","Canada","Particulates (PM2.5)",2007,2188,2574,"Tonnes","Thousands",1336.418,2.978,417.833,361.614,23.807,6.814,35.865,122.815,364.694,4762
+"4","Canada","Particulates (PM2.5)",2008,2063,2425,"Tonnes","Thousands",1397.38,2.882,404.411,362.764,22.97,6.703,34.649,120.103,442.899,4488
+"5","Canada","Particulates (PM2.5)",2009,1930,2262,"Tonnes","Thousands",1277.106,2.929,391.34,372.505,21.346,5.984,31.994,118.24,332.77,4192
+"6","Canada","Particulates (PM2.5)",2010,1821,2133,"Tonnes","Thousands",1346.268,2.803,378.516,373.319,21.263,5.647,32.985,106.23,425.506,3954
+"7","Canada","Particulates (PM2.5)",2011,1748,2024,"Tonnes","Thousands",1388.116,2.704,365.229,386.941,20.034,4.24,28.66,108.792,471.516,3772
+"8","Canada","Particulates (PM2.5)",2012,1683,1965,"Tonnes","Thousands",1494.169,2.586,368.497,407.491,18.86,3.171,25.492,102.94,565.133,3647
+"9","Canada","Particulates (PM2.5)",2013,1632,1905,"Tonnes","Thousands",1508.69,2.547,370.971,415.403,18.244,3.177,23.963,109.883,564.502,3537
+"10","Canada","Particulates (PM2.5)",2014,1617,1884,"Tonnes","Thousands",1510.061,2.538,374.161,417.98,16.999,3.507,22.219,109.598,563.059,3500
+"11","Canada","Particulates (PM2.5)",2015,1611,1882,"Tonnes","Thousands",1520.216,2.604,377.147,435.821,15.95,3.38,19.561,104.66,561.094,3493
+"12","Canada","Particulates (PM2.5)",2016,1642,1932,"Tonnes","Thousands",1511.856,2.603,379.948,437.206,15.942,3.289,15.933,97.315,559.62,3574
+"13","Canada","Particulates (PM2.5)",2017,1674,1981,"Tonnes","Thousands",1525.699,2.635,382.713,446.546,16.495,3.205,17.097,97.222,559.786,3655
+"14","Canada","Particulates (PM2.5)",2018,1725,2065,"Tonnes","Thousands",1547.492,2.666,385.189,461.312,17.097,3.1,18.132,99.911,560.085,3790
+"15","Canada","Particulates (PM2.5)",2019,1710,2055,"Tonnes","Thousands",1550.49,2.722,387.808,463.49,17.131,2.706,18.066,99.367,559.2,3765

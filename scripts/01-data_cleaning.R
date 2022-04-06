@@ -14,33 +14,35 @@ library(haven)
 library(tidyverse)
 
 # Read in the raw data. 
-Ap_data <- readr::read_csv("inputs/data/AIR_EMISSIONS.csv")
-De_data <- readr::read_csv("inputs/data/EXP_MORSC.csv")
+Ap_data <- readr::read_csv("inputs/data/AIR_EMISSIONS_DATA.csv")
 
-# Just keep some variables that may be of interest from the De_data 
-reduced_De <- 
-  De_data %>% 
+
+# Just keep some variables that may be of interest from the Ap_data 
+
+reduced_df <- 
+  Ap_data %>% 
   select(Country, 
-         Variable,
-         Risk,
-         Sex,
-         Age,
-         Value,
+         Pollutant,
          Year,
-         Unit)
-# rename variable "value"
-reduced_De <- reduced_De %>% rename(NumOfDeath = Value)
+         FemaleD,
+         MaleD,
+         Unit,
+         PowerCode,
+         `Total man-made emissions`,
+         Waste,
+         Agriculture,
+         Miscellaneous,
+         `Road Transport`,
+         `Power stations`,
+         `Other Mobile Sources`,
+         Combustion,
+         `Industrial processes and product use`,
+         `Premature deaths`)
 
-# select observations that are from all age range, no matter what gender.
-redecued_De <- reduced_De %>% filter(reduced_De$Age =='All')
 
-         
-#rename variable "value" in Ap_data
-reduced_Ap <- Ap_data %>% rename(TT_emission = Value)
+#save the output in outputs/data
+write.csv(reduced_df, file="outputs/data/cleaned_APD.csv")
 
-#save two dataset in outputs/data
-write.csv(reduced_Ap, file="outputs/data/cleaned_AP.csv")
-write.csv(reduced_De, file="outputs/data/cleaned_DE.csv")
 
 
 
