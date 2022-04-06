@@ -1,0 +1,121 @@
+"","Country","Pollutant","Variable","Year","Unit","PowerCode","TT_emission"
+"1","Canada","Particulates (PM2.5)","Road Transport",2005,"Tonnes","Thousands",26.39
+"2","Canada","Particulates (PM2.5)","Road Transport",2006,"Tonnes","Thousands",24.919
+"3","Canada","Particulates (PM2.5)","Road Transport",2007,"Tonnes","Thousands",23.807
+"4","Canada","Particulates (PM2.5)","Road Transport",2008,"Tonnes","Thousands",22.97
+"5","Canada","Particulates (PM2.5)","Road Transport",2009,"Tonnes","Thousands",21.346
+"6","Canada","Particulates (PM2.5)","Road Transport",2010,"Tonnes","Thousands",21.263
+"7","Canada","Particulates (PM2.5)","Road Transport",2011,"Tonnes","Thousands",20.034
+"8","Canada","Particulates (PM2.5)","Road Transport",2012,"Tonnes","Thousands",18.86
+"9","Canada","Particulates (PM2.5)","Road Transport",2013,"Tonnes","Thousands",18.244
+"10","Canada","Particulates (PM2.5)","Road Transport",2014,"Tonnes","Thousands",16.999
+"11","Canada","Particulates (PM2.5)","Road Transport",2015,"Tonnes","Thousands",15.95
+"12","Canada","Particulates (PM2.5)","Road Transport",2016,"Tonnes","Thousands",15.942
+"13","Canada","Particulates (PM2.5)","Road Transport",2017,"Tonnes","Thousands",16.495
+"14","Canada","Particulates (PM2.5)","Road Transport",2018,"Tonnes","Thousands",17.097
+"15","Canada","Particulates (PM2.5)","Road Transport",2019,"Tonnes","Thousands",17.131
+"16","Canada","Particulates (PM2.5)","Other Mobile Sources",2005,"Tonnes","Thousands",38.992
+"17","Canada","Particulates (PM2.5)","Other Mobile Sources",2006,"Tonnes","Thousands",36.158
+"18","Canada","Particulates (PM2.5)","Other Mobile Sources",2007,"Tonnes","Thousands",35.865
+"19","Canada","Particulates (PM2.5)","Other Mobile Sources",2008,"Tonnes","Thousands",34.649
+"20","Canada","Particulates (PM2.5)","Other Mobile Sources",2009,"Tonnes","Thousands",31.994
+"21","Canada","Particulates (PM2.5)","Other Mobile Sources",2010,"Tonnes","Thousands",32.985
+"22","Canada","Particulates (PM2.5)","Other Mobile Sources",2011,"Tonnes","Thousands",28.66
+"23","Canada","Particulates (PM2.5)","Other Mobile Sources",2012,"Tonnes","Thousands",25.492
+"24","Canada","Particulates (PM2.5)","Other Mobile Sources",2013,"Tonnes","Thousands",23.963
+"25","Canada","Particulates (PM2.5)","Other Mobile Sources",2014,"Tonnes","Thousands",22.219
+"26","Canada","Particulates (PM2.5)","Other Mobile Sources",2015,"Tonnes","Thousands",19.561
+"27","Canada","Particulates (PM2.5)","Other Mobile Sources",2016,"Tonnes","Thousands",15.933
+"28","Canada","Particulates (PM2.5)","Other Mobile Sources",2017,"Tonnes","Thousands",17.097
+"29","Canada","Particulates (PM2.5)","Other Mobile Sources",2018,"Tonnes","Thousands",18.132
+"30","Canada","Particulates (PM2.5)","Other Mobile Sources",2019,"Tonnes","Thousands",18.066
+"31","Canada","Particulates (PM2.5)","Power stations",2005,"Tonnes","Thousands",8.728
+"32","Canada","Particulates (PM2.5)","Power stations",2006,"Tonnes","Thousands",5.914
+"33","Canada","Particulates (PM2.5)","Power stations",2007,"Tonnes","Thousands",6.814
+"34","Canada","Particulates (PM2.5)","Power stations",2008,"Tonnes","Thousands",6.703
+"35","Canada","Particulates (PM2.5)","Power stations",2009,"Tonnes","Thousands",5.984
+"36","Canada","Particulates (PM2.5)","Power stations",2010,"Tonnes","Thousands",5.647
+"37","Canada","Particulates (PM2.5)","Power stations",2011,"Tonnes","Thousands",4.24
+"38","Canada","Particulates (PM2.5)","Power stations",2012,"Tonnes","Thousands",3.171
+"39","Canada","Particulates (PM2.5)","Power stations",2013,"Tonnes","Thousands",3.177
+"40","Canada","Particulates (PM2.5)","Power stations",2014,"Tonnes","Thousands",3.507
+"41","Canada","Particulates (PM2.5)","Power stations",2015,"Tonnes","Thousands",3.38
+"42","Canada","Particulates (PM2.5)","Power stations",2016,"Tonnes","Thousands",3.289
+"43","Canada","Particulates (PM2.5)","Power stations",2017,"Tonnes","Thousands",3.205
+"44","Canada","Particulates (PM2.5)","Power stations",2018,"Tonnes","Thousands",3.1
+"45","Canada","Particulates (PM2.5)","Power stations",2019,"Tonnes","Thousands",2.706
+"46","Canada","Particulates (PM2.5)","Combustion",2005,"Tonnes","Thousands",120.585
+"47","Canada","Particulates (PM2.5)","Combustion",2006,"Tonnes","Thousands",110.4
+"48","Canada","Particulates (PM2.5)","Combustion",2007,"Tonnes","Thousands",122.815
+"49","Canada","Particulates (PM2.5)","Combustion",2008,"Tonnes","Thousands",120.103
+"50","Canada","Particulates (PM2.5)","Combustion",2009,"Tonnes","Thousands",118.24
+"51","Canada","Particulates (PM2.5)","Combustion",2010,"Tonnes","Thousands",106.23
+"52","Canada","Particulates (PM2.5)","Combustion",2011,"Tonnes","Thousands",108.792
+"53","Canada","Particulates (PM2.5)","Combustion",2012,"Tonnes","Thousands",102.94
+"54","Canada","Particulates (PM2.5)","Combustion",2013,"Tonnes","Thousands",109.883
+"55","Canada","Particulates (PM2.5)","Combustion",2014,"Tonnes","Thousands",109.598
+"56","Canada","Particulates (PM2.5)","Combustion",2015,"Tonnes","Thousands",104.66
+"57","Canada","Particulates (PM2.5)","Combustion",2016,"Tonnes","Thousands",97.315
+"58","Canada","Particulates (PM2.5)","Combustion",2017,"Tonnes","Thousands",97.222
+"59","Canada","Particulates (PM2.5)","Combustion",2018,"Tonnes","Thousands",99.911
+"60","Canada","Particulates (PM2.5)","Combustion",2019,"Tonnes","Thousands",99.367
+"61","Canada","Particulates (PM2.5)","Industrial processes and product use",2005,"Tonnes","Thousands",252.912
+"62","Canada","Particulates (PM2.5)","Industrial processes and product use",2006,"Tonnes","Thousands",295.558
+"63","Canada","Particulates (PM2.5)","Industrial processes and product use",2007,"Tonnes","Thousands",364.694
+"64","Canada","Particulates (PM2.5)","Industrial processes and product use",2008,"Tonnes","Thousands",442.899
+"65","Canada","Particulates (PM2.5)","Industrial processes and product use",2009,"Tonnes","Thousands",332.77
+"66","Canada","Particulates (PM2.5)","Industrial processes and product use",2010,"Tonnes","Thousands",425.506
+"67","Canada","Particulates (PM2.5)","Industrial processes and product use",2011,"Tonnes","Thousands",471.516
+"68","Canada","Particulates (PM2.5)","Industrial processes and product use",2012,"Tonnes","Thousands",565.133
+"69","Canada","Particulates (PM2.5)","Industrial processes and product use",2013,"Tonnes","Thousands",564.502
+"70","Canada","Particulates (PM2.5)","Industrial processes and product use",2014,"Tonnes","Thousands",563.059
+"71","Canada","Particulates (PM2.5)","Industrial processes and product use",2015,"Tonnes","Thousands",561.094
+"72","Canada","Particulates (PM2.5)","Industrial processes and product use",2016,"Tonnes","Thousands",559.62
+"73","Canada","Particulates (PM2.5)","Industrial processes and product use",2017,"Tonnes","Thousands",559.786
+"74","Canada","Particulates (PM2.5)","Industrial processes and product use",2018,"Tonnes","Thousands",560.085
+"75","Canada","Particulates (PM2.5)","Industrial processes and product use",2019,"Tonnes","Thousands",559.2
+"76","Canada","Particulates (PM2.5)","Miscellaneous",2005,"Tonnes","Thousands",342.01
+"77","Canada","Particulates (PM2.5)","Miscellaneous",2006,"Tonnes","Thousands",343.778
+"78","Canada","Particulates (PM2.5)","Miscellaneous",2007,"Tonnes","Thousands",361.614
+"79","Canada","Particulates (PM2.5)","Miscellaneous",2008,"Tonnes","Thousands",362.764
+"80","Canada","Particulates (PM2.5)","Miscellaneous",2009,"Tonnes","Thousands",372.505
+"81","Canada","Particulates (PM2.5)","Miscellaneous",2010,"Tonnes","Thousands",373.319
+"82","Canada","Particulates (PM2.5)","Miscellaneous",2011,"Tonnes","Thousands",386.941
+"83","Canada","Particulates (PM2.5)","Miscellaneous",2012,"Tonnes","Thousands",407.491
+"84","Canada","Particulates (PM2.5)","Miscellaneous",2013,"Tonnes","Thousands",415.403
+"85","Canada","Particulates (PM2.5)","Miscellaneous",2014,"Tonnes","Thousands",417.98
+"86","Canada","Particulates (PM2.5)","Miscellaneous",2015,"Tonnes","Thousands",435.821
+"87","Canada","Particulates (PM2.5)","Miscellaneous",2016,"Tonnes","Thousands",437.206
+"88","Canada","Particulates (PM2.5)","Miscellaneous",2017,"Tonnes","Thousands",446.546
+"89","Canada","Particulates (PM2.5)","Miscellaneous",2018,"Tonnes","Thousands",461.312
+"90","Canada","Particulates (PM2.5)","Miscellaneous",2019,"Tonnes","Thousands",463.49
+"91","Canada","Particulates (PM2.5)","Agriculture",2005,"Tonnes","Thousands",451.223
+"92","Canada","Particulates (PM2.5)","Agriculture",2006,"Tonnes","Thousands",431.57
+"93","Canada","Particulates (PM2.5)","Agriculture",2007,"Tonnes","Thousands",417.833
+"94","Canada","Particulates (PM2.5)","Agriculture",2008,"Tonnes","Thousands",404.411
+"95","Canada","Particulates (PM2.5)","Agriculture",2009,"Tonnes","Thousands",391.34
+"96","Canada","Particulates (PM2.5)","Agriculture",2010,"Tonnes","Thousands",378.516
+"97","Canada","Particulates (PM2.5)","Agriculture",2011,"Tonnes","Thousands",365.229
+"98","Canada","Particulates (PM2.5)","Agriculture",2012,"Tonnes","Thousands",368.497
+"99","Canada","Particulates (PM2.5)","Agriculture",2013,"Tonnes","Thousands",370.971
+"100","Canada","Particulates (PM2.5)","Agriculture",2014,"Tonnes","Thousands",374.161
+"101","Canada","Particulates (PM2.5)","Agriculture",2015,"Tonnes","Thousands",377.147
+"102","Canada","Particulates (PM2.5)","Agriculture",2016,"Tonnes","Thousands",379.948
+"103","Canada","Particulates (PM2.5)","Agriculture",2017,"Tonnes","Thousands",382.713
+"104","Canada","Particulates (PM2.5)","Agriculture",2018,"Tonnes","Thousands",385.189
+"105","Canada","Particulates (PM2.5)","Agriculture",2019,"Tonnes","Thousands",387.808
+"106","Canada","Particulates (PM2.5)","Waste",2005,"Tonnes","Thousands",3.862
+"107","Canada","Particulates (PM2.5)","Waste",2006,"Tonnes","Thousands",3.076
+"108","Canada","Particulates (PM2.5)","Waste",2007,"Tonnes","Thousands",2.978
+"109","Canada","Particulates (PM2.5)","Waste",2008,"Tonnes","Thousands",2.882
+"110","Canada","Particulates (PM2.5)","Waste",2009,"Tonnes","Thousands",2.929
+"111","Canada","Particulates (PM2.5)","Waste",2010,"Tonnes","Thousands",2.803
+"112","Canada","Particulates (PM2.5)","Waste",2011,"Tonnes","Thousands",2.704
+"113","Canada","Particulates (PM2.5)","Waste",2012,"Tonnes","Thousands",2.586
+"114","Canada","Particulates (PM2.5)","Waste",2013,"Tonnes","Thousands",2.547
+"115","Canada","Particulates (PM2.5)","Waste",2014,"Tonnes","Thousands",2.538
+"116","Canada","Particulates (PM2.5)","Waste",2015,"Tonnes","Thousands",2.604
+"117","Canada","Particulates (PM2.5)","Waste",2016,"Tonnes","Thousands",2.603
+"118","Canada","Particulates (PM2.5)","Waste",2017,"Tonnes","Thousands",2.635
+"119","Canada","Particulates (PM2.5)","Waste",2018,"Tonnes","Thousands",2.666
+"120","Canada","Particulates (PM2.5)","Waste",2019,"Tonnes","Thousands",2.722
