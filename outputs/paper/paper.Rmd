@@ -1,12 +1,10 @@
 ---
-title: "My title"
-subtitle: "My subtitle if needed"
+title: "Agriculture and combustion, are two major sources of particular matter(PM2.5) that are associated with premature deaths in Canada"
 author: 
-  - First author
-  - Another author
-thanks: "Code and data are available at: LINK."
-date: "`r format(Sys.time(), '%d %B %Y')`"
-abstract: "First sentence. Second sentence. Third sentence. Fourth sentence."
+  - Zhongyu Huang
+thanks: "Code and data are available at: https://github.com/zhongyuhuang/Household-air-pollution-attributable-deaths-Analysis.git"
+date: "April 6, 2022"
+abstract: "The silent killer, PM2.5, was ranked the fifth risk factor for cardiovascular disease and lung cancer. Approximately 4.5 million individuals died due to exposure to PM2.5 globally every year. This report aims to model and predict the trend of premature deaths resulting from PM2.5 in Canada by using the linear regression model. The results indicate that the number of premature deaths can be explained by man-made emissions from agriculture and combustion. Increasing emissions from these two sources are significantly related to increases in deaths."
 output:
   bookdown::pdf_document2
 toc: FALSE
@@ -15,29 +13,107 @@ bibliography: references.bib
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-
+library(modelsummary)
 library(tidyverse)
-library(palmerpenguins)
+library(ggplot2)
+library(car)
+library(dplyr)
+f <- file.choose()
+APD <- read.csv(f)
 ```
 
 # Introduction
 
-You can and should cross-reference sections and sub-sections. For instance, Section \@ref(data). R Markdown automatically makes the sections lower case and adds a dash to spaces to generate labels, for instance, Section \@ref(first-discussion-point). 
-
+ The government of Canada reported that an estimated 15,300 premature deaths are linked to air pollution every year. That is, approximately 5% of the total number of deaths reported in 2020. The health effects of air pollution have been subject to intense study in recent years. Exposure to pollutants such as airborne participate matter and ozone has been associated with increases in mortality and hospital admissions due to respiratory and cardiovascular disease. These effects have been found in short-term studies, which relate day-to-day variations in air pollution and health, and long-term studies, which have followed cohorts of exposed individuals over time.
 
 
 # Data
 
-Our data is of penguins (Figure \@ref(fig:bills)).
+Our data is of Air pollution (Figure \@ref(fig:pd)).
 
-```{r bills, fig.cap="Bills of penguins", echo = FALSE}
-ggplot(penguins, aes(x = island, fill = species)) +
-  geom_bar(alpha = 0.8) +
-  scale_fill_manual(values = c("darkorange","purple","cyan4"),
-                    guide = FALSE) +
-  theme_minimal() +
-  facet_wrap(~species, ncol = 1) +
-  coord_flip()
+```{r pd, fig.cap="Premature deaths caused by fine particulate matter", echo = FALSE}
+#EDA
+
+for(i in 9:18){
+hist(APD[,i], main=paste0("Histogram of ", names(APD)[i]), xlab=names(APD)[i], cex.main=0.75)
+}
+```
+```{r,include=FALSE, echo=FALSE}
+
+APD2 <- APD %>% mutate (Premature.deaths=Premature.deaths+0.5, Waste=Waste+0.5, Agriculture=Agriculture+0.5,Road.Transport=Road.Transport+0.5, Miscellaneous=Miscellaneous+0.5,Power.stations=Power.stations+0.5, Other.Mobile.Sources=Other.Mobile.Sources+0.5, Combustion=Combustion+0.5, Industrial.processes.and.product.use=Industrial.processes.and.product.use+0.5)
+
+APD3<- APD2 %>% select(`Premature.deaths`, Waste, Agriculture, `Road.Transport`, Miscellaneous, `Power.stations` , `Other.Mobile.Sources` , Combustion , `Industrial.processes.and.product.use`)
+
+APD4 <- APD3 %>% mutate(Premature.deaths = log(Premature.deaths), Power.stations=log(Power.stations))
+Model2 <- lm(Premature.deaths ~ Waste + Agriculture + Road.Transport + Miscellaneous + Power.stations + Other.Mobile.Sources + Combustion + Industrial.processes.and.product.use, data=APD4)
+
+
+Model1 <- lm(Premature.deaths ~ Waste + Agriculture + Road.Transport + Miscellaneous + Power.stations + Other.Mobile.Sources + Combustion + Industrial.processes.and.product.use, data=APD3)
+
+Model3 <- lm(Premature.deaths ~ Waste + Agriculture + Road.Transport + Miscellaneous + Power.stations  + Combustion + Industrial.processes.and.product.use, data=APD4)
+#vif(Model3)
+#summary(Model3)$adj.r.squared
+#summary(Model2)$adj.r.squared
+Model4 <- lm(Premature.deaths ~ Waste + Agriculture  + Miscellaneous + Power.stations  + Combustion + Industrial.processes.and.product.use, data=APD4)
+
+Model6 <- lm(Premature.deaths ~ Waste + Agriculture  + Miscellaneous  + Combustion+  Road.Transport, data=APD4)
+
+Model7 <- lm(Premature.deaths ~  Agriculture  + Miscellaneous + Combustion, data=APD4)
+
+#check condition1 and condition2
+pairs(APD[, -c(1:9,18)])
+plot(APD$Premature.deaths ~ fitted(Model1), main="Y versus Yhat", ylab="response", xlab="yhat")
+abline(a = 0, b = 1)
+lines(APD$Premature.deaths ~ fitted(Model1), lty=2)
+#Transform
+
+boxCox(Model1)
+p <- powerTransform(cbind(APD3[,-c(1,2)]))
+summary(p)
+
+
+
+plot(APD4$Premature.deaths ~ fitted(Model2))
+plot(Model2)
+plot(Model1)
+
+mod1 <- lm(Premature.deaths ~ Waste + Agriculture +Road.Transport+Miscellaneous +Power.stations, data=APD4)
+anova(mod1, Model2)
+plot(resid(mod1) ~ fitted(mod1))
+plot(resid(mod1) ~ APD4$Waste)
+plot(resid(mod1) ~ APD4$Agriculture)
+qqnorm(resid(mod1))
+qqline(resid(mod1))
+
+n <- nrow(APD4)
+p <- length(coef(Model2))-1
+Hcut <- 2*((p+1)/n)
+DFFITScut <- 2*sqrt((p+1)/n)
+DFBETAcut <- 2/sqrt(n)
+Dcut <- qf(0.5, p+1, n-p-1)
+# identify the leverage points
+h <- hatvalues(Model2)
+which(h>Hcut)
+h
+r <- rstandard(Model2)
+which(r < -2 | r > 2)
+
+
+for(i in 9:18){
+boxplot(APD[,i], main=paste0("Boxplot of ", names(APD)[i]), xlab=names(APD)[i]
+, horizontal=T)
+}
+```
+```{r,include=FALSE,echo=FALSE}
+#install.packages("modelsummary")
+
+
+p<-modelsummary(list(Model1,
+                  Model2, 
+                  Model7),
+             fmt = 2,
+             title = "Explaining marathon time based on five-kilometer run times and weather features")
+p
 ```
 
 Talk more about it.
@@ -46,14 +122,7 @@ Also bills and their average (Figure \@ref(fig:billssssss)). (Notice how you can
 
 ```{r billssssss, fig.cap="More bills of penguins", echo = FALSE, fig.width=8, fig.height=4}
 
-# This needs to be about the random data tha tI sasmpled?
-ggplot(penguins, aes(x = island, fill = species)) +
-  geom_bar(alpha = 0.8) +
-  scale_fill_manual(values = c("darkorange","purple","cyan4"),
-                    guide = FALSE) +
-  theme_minimal() +
-  facet_wrap(~species, ncol = 1) +
-  coord_flip()
+
 ```
 
 Talk way more about it. 
