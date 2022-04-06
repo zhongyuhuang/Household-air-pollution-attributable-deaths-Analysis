@@ -1,5 +1,5 @@
-# Household-air-pollution-attributable-deaths-Analysis
+# Air pollution-attributable-deaths-Analysis
 
-This repo uses the Household air pollution: burden of disease data of all WHO members collected by the World Health Organization in 2016. It aims to reveal any trends of deaths resulting from household air pollution among countries.
+This repo uses the air pollution emission by sources data and the related premature death data of Canada collected by organization for Economic Co-operation and Development from 2005-2019. This report aims to model and predict the trend of premature deaths resulting from PM2.5 in Canada by using the linear regression model.
 
-The data - available here: https://www.who.int/data/gho/data/indicators/indicator-details/GHO/household-air-pollution-attributable-deaths, is saved in inputs/data.
+The data - available here: https://stats.oecd.org/Index.aspx?DataSetCode=EXP_MORSC#, is saved in inputs/data.
