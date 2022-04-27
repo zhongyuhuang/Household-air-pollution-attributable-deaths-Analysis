@@ -35,6 +35,7 @@ library(rnaturalearth)
 library(rnaturalearthdata)
 library(ggspatial)
 library(geosphere)
+library(knitr)
 f <- file.choose()
 AS <- read.csv(f)
 f2 <- file.choose()
@@ -43,22 +44,22 @@ metadata <- read.csv(f2)
 
 # Introduction
 
-  In recent years, extreme pollution events bring people's attention to studying the impacts due to air pollution. Exposure to pollutants such as nitrogen oxides (NOX) or sulfur oxides (SOX) can cause serious health issues including damaging lung function(Government of Canada, 2021). As the main component of smog, fine particulate matter and ground-level ozone (O3) can cause dysfunction of the eye, nose, throat, or lung(Government of Canada, 2021). Fine particulate matter has been identified as one of the risk factors for cardiovascular disease and premature death(Government of Canada, 2021). Other pollutants such as Carbon monoxide (CO) and Ammonia (NH3) are also harmful to human health(Government of Canada, 2021). Most of them are colorless gas to be not noticed. The vulnerable group, children and the elderly, can be harmed more easily at greater risk(Government of Canada, 2021). In addition, indirect evidence was found to explain how air pollution influences mood and human cognitive functions.
+  In recent years, extreme pollution events bring people's attention to studying the impacts due to air pollution. Exposure to pollutants such as nitrogen oxides (NOX) or sulfur oxides (SOX) can cause serious health issues including damaging lung function[@gov]. As the main component of smog, fine particulate matter and ground-level ozone (O3) can cause dysfunction of the eye, nose, throat, or lung[@gov]. Fine particulate matter has been identified as one of the risk factors for cardiovascular disease and premature death[@gov]. Other pollutants such as Carbon monoxide (CO) and Ammonia (NH3) are also harmful to human health[@gov]. Most of them are colorless gas to be not noticed. The vulnerable group, children and the elderly, can be harmed more easily at greater risk. In addition, indirect evidence was found to explain how air pollution influences mood and human cognitive functions.
    
-  The article 'Ambient particulate air pollution and daily stock market returns and volatility in 47 cities worldwide' by Simo Kiihamäki, Marko Korhonen, and Jouni Jaakkola investigates how daily concentrations of fine particulate matter influence daily stock market returns and volatility. They aim to test two hypotheses. The first is that the increases in the daily PM2.5 concentrations decrease daily stock returns. The second is that the increases in daily PM2.5 concentrations increase daily stock volatility. Linear models and meta-regression analysis are performed to generate results at the global level. Evidence from regression models for each city supports that short-term exposure to PM2.5 could lead to a decrease in stock returns.
+  The article 'Ambient particulate air pollution and daily stock market returns and volatility in 47 cities worldwide' by Simo Kiihamäki, Marko Korhonen, and Jouni Jaakkola investigates how daily concentrations of fine particulate matter influence daily stock market returns and volatility[@am]. They aim to test two hypotheses. The first is that the increases in the daily PM2.5 concentrations decrease daily stock returns[@am]. The second is that the increases in daily PM2.5 concentrations increase daily stock volatility[@am]. Linear models and meta-regression analysis are performed to generate results at the global level. Evidence from regression models for each city supports that short-term exposure to PM2.5 could lead to a decrease in stock returns[@am].
   
-  This paper replicates the original analysis in the article by using the dataset provided by the authors. Data related to air pollution data, stock index, and meteorology are provided in the dataset. The dataset will be introduced and explained in more detail first in the Data section. Their methods will be explored in the Results section. Regression models created in the original analysis will be replicated while additional models are produced and explored. Results and discussion will be presented in the end.
+  This paper use R [@citeR] replicates the original analysis in the article by using the dataset provided by the authors. Data related to air pollution data, stock index, and meteorology are provided in the dataset. The dataset will be introduced and explained in more detail first in the Data section. Their methods will be explored in the Results section. Regression models created in the original analysis will be replicated while additional models are produced and explored. Results and discussion will be presented in the end.
    
 
 # Data
 
 ## Data source and collection
 
-This paper uses the datasets conducted by Kiihamäki etc. The datasets are available as CSV files from https://data.mendeley.com/datasets/z8t3s8btxv/1. They store air pollution data, stock index data, and meteorological data for 47759 observations from 47 cities worldwide. Daily returns of stocks are collected from investing.com. This website is a financial markets platform offering access to real-time data and free financial tools across 250 exchanges around the world. However, it is worthy to notice that this platform claims that data provided by them is not necessarily by any market or exchange, hence not necessarily real-time nor accurate. Data related to air pollution are collected from various sources including the European Environment Agency, the U.S. Department of State, and so on. Only 47 out of 88 countries have sufficient PM2.5 concentration to be involved in the original analysis. Meteorological data for these countries are obtained from the Global Surface Summary of the Day. It is a product of the National Oceanic and Atmosphere Administration and it possesses averages of daily weather elements computed from global hourly station data.  
+This paper uses the datasets conducted by Kiihamäki etc. The datasets are available as CSV files from https://data.mendeley.com/datasets/z8t3s8btxv/1. They store air pollution data, stock index data, and meteorological data for 47759 observations from 47 cities worldwide[@data]. Daily returns of stocks are collected from investing.com[@data]. This website is a financial markets platform offering access to real-time data and free financial tools across 250 exchanges around the world[@in]. However, it is worthy to notice that this platform claims that data provided by them is not necessarily by any market or exchange, hence not necessarily real-time nor accurate[@in]. Data related to air pollution are collected from various sources including the European Environment Agency, the U.S. Department of State, and so on[@data]. Only 47 out of 88 countries have sufficient PM2.5 concentration to be involved in the original analysis. Meteorological data for these countries are obtained from the Global Surface Summary of the Day[@data]. It is a product of the National Oceanic and Atmosphere Administration and it possesses averages of daily weather elements computed from global hourly station data[@dd].  
 
 ## Missing Values
 
-The authors used two technics to deal with missing values in datasets. As for the missing values that exist in either stock data or air pollution data, the authors choose to omit observations from all day if any of the stock returns or PM2.5 concentration is missing. This decision is made based on that it is impractical to find relations in the absence of these data. As for meteorological variables, there exist a large amount of randomly missing data. These variables are served as confounding factors that affect the research question in the original paper. The authors decide to impute these missing values to perform adjustments due to confounders by using classification and regression training. 
+The authors used two technics to deal with missing values in datasets. As for the missing values that exist in either stock data or air pollution data, the authors choose to omit observations from all day if any of the stock returns or PM2.5 concentration is missing[@am]. This decision is made based on that it is impractical to find relations in the absence of these data. As for meteorological variables, there exist a large amount of randomly missing data[@am]. These variables are served as confounding factors that affect the research question in the original paper. The authors decide to impute these missing values to perform adjustments due to confounders by using classification and regression training[@am]. 
 
 ## Visualization of variables
 
@@ -86,80 +87,25 @@ grid.arrange(p1,p2,p3,p4,p5,p6)
 
 ```
 
-
+\newpage
 # Model
-```{r, include=FALSE}
 
-# turn character variable to factors
-AS$temp_bins <- as.factor(AS$temp_bins)
-AS$dewp_bins <- as.factor(AS$dewp_bins)
-AS$woy <- as.factor(AS$woy)
-AS$dow <- as.factor(AS$dow)
 
-# setup the initial linear model
-model <- formula(log_ret ~ pm25 + lag1_ret + lag2_ret + PRCP + WDSP + SLP + VISIB + temp_bins + dewp_bins + SAD + dow + woy)
+In this paper, only the stock return model has been replicated. Here, the stock return is defined as: - $RET_t = (ln(P_t)-ln(P_t-1)*100$  , where Pt is the closing price of the city’s corresponding stock index on day t. The complete model is:
 
-# setup required list
-garch_fits <- list()
-lm_fits <- list()
-return_models <- list()
-n <- vector()
-city <- vector()
+- $RET_t = \beta_0 +\beta_1*PM2.5_t + \beta_2*RET_t-1 + \beta_3*RET_t-2 + \beta_4*woy_t + \beta_5*dow_t +\beta_6*PRCP_t +\beta_7*WDSP_t + \beta_8*VISIB_t + \beta_9*SLP_t + \beta_10*TEMPbin_t + \beta_11*DEWPbin_t + \beta_12*AD + \epsilon$
 
-## make models for all each of the city 
-for (i in unique(AS$city)) {
-
-  data <- AS[AS$city == i, ]
-  data <- data[!is.na(data$lag1_ret), ]
-  data$YDAY <- as.numeric(strftime(data$date, format = "%j"))
-  latitude <- metadata$Latitude[metadata$City == i]
-  data$SAD <- daylength(latitude, data$YDAY)
-  
-  
-  if (nrow(data) > 0) {  
-    
-    # append the n and city vectors
-    n[(length(n) + 1)] <- nrow(data)
-    city[(length(city) + 1)] <- i
-    
-    
-    # data transformations 
-    data$pm25 <- data$pm25/10
-    data$lag1_pm25 <- dplyr::lag(data$pm25, 1)
-    data$lag2_pm25 <- dplyr::lag(data$pm25, 2)
-    data$pm25_01 <- rollmean(data$pm25, 2, fill = NA, align = "right", na.pad = T)
-    data$pm25_02 <- rollmean(data$pm25, 3, fill = NA, align = "right", na.pad = T)
-    
-    
-    # fit the linear model 
-    fit <- lm(formula, data = data, na.action = "na.exclude")
-    return_models[[i]] <- fit
-    
-    # retrieve residuals for the GARCH models
-    data$resid <- residuals(fit)
-    temp_data <- data[!is.na(data$resid), ]
-    
-    # define the gjrGARCH(1,1) model specifications and run
-    spec <- ugarchspec(variance.model = list(model = "gjrGARCH", garchOrder = c(1, 1)), mean.model=list(armaOrder=c(0,0), include.mean=TRUE), distribution.model = "norm")
-    garch_fits[[i]] <- ugarchfit(spec, temp_data$resid)
-    
-    # retrieve predicted volatilities
-    temp_data$vola <- garch_fits[[i]]@fit$sigma
-    
-    # run linear model on the garch volatilities
-    formula2 <- formula(vola ~ pm25 + lag1_ret + lag2_ret + PRCP + WDSP + SLP + VISIB + temp_bins + dewp_bins + SAD + dow + woy)
-    
-    lm_fits[[i]] <- lm(formula2, data = temp_data, na.action = na.exclude)
-    
-    
-  } else {
-     next
-  }
-}
-```
+Woy and dow representing week of year and day of week are included as dummy variables in the model. 1-day and 2-day lagged returns are fitted in the model to account for autocorrelation in the stock return. PRCP denotes precipitation. WDSP denotes wind speed. SLP denotes sea level pressure. VISIB denotes visibility. SAD denotes the daylength in hours. They are all treated as continuous variables in the model. TEMP_bins denotes temperature and it is treated as dummy bin. Same for dew point (DEWP_bins). $\epsilon$ is the Newey-West standard errors. Traffic emissions are considered as confounding factors here. Daily NO2 concentrations are fitted into the model to perform adjustments.
 
 
 # Results
+
+Regression models for each city are performed individually. The estimated coefficients with their 95% confidence intervals are summarized(Figure \@ref(fig:bills5)). We can see the effects varies among cities from $-0.241$ to $0.123$. Frankfurt has the largest negative effect of PM2.5 on stock returns. Milan has the largest positive effect of PM2.5 on stock returns. The summary effect estimate for PM2.5 based on all 47 city is $-0.012$. This number indicates that a 10 microgram per cubic metre increase in concentration of PM2.5 leads to an average 1.2% reduction in daily stock returns. It provides statistically significant evidence to not reject hypothesis 1. That is, exposure to PM2.5 would lead to a decrease in stock returns. Traffic emissions are treated as confounding factors here. In absence of direct volumes of traffic emissions, concentrations of NO2 are used here. However, the effect estimates are not significantly influenced in models after fitting the data of NO2[@am].
+
+```{r bills5, fig.cap="Regression coefficients and 95% confidence intervals for 47 cities", echo = FALSE, fig.height=36, fig.width=32}
+# add figure
+include_graphics(here::here("inputs/data/im.jpg"))
+```
 
 # Discussion
 
@@ -170,12 +116,12 @@ It might be possible for stock returns to be higher when there is no pollution. 
 
 ## Other non-health outcomes
 
-Often we could hear discussions on how human behaviors produce or reduce air pollution. It is rare to talk about this topic in the opposite perspective, especially on psychiatric aspect. Only a few researches had examined these effects linked to air pollution. However, evidence had been found to suggest that air pollutants interfere with functioning of the nervous system. Other than that, although the ability to withstand anxiety depends on individual, medical effects of air pollution can indirectly affect psychological health. Research from 2017 had found the relationship between ambient air pollution and increased aggressive behavior in teenagers.
+Often we could hear discussions on how human behaviors produce or reduce air pollution. It is rare to talk about this topic in the opposite perspective, especially on psychiatric aspect. Only a few researches had examined these effects linked to air pollution. However, evidence had been found to suggest that air pollutants interfere with functioning of the nervous system[@na]. Other than that, although the ability to withstand anxiety depends on individual, medical effects of air pollution can indirectly affect psychological health[@na]. Research from 2017 had found the relationship between ambient air pollution and increased aggressive behavior in teenagers[@teen].
 
 
 ## Weaknesses and next steps
 
-Although we found a link between the daily concentration of PM2.5 and the daily stock return, we did not prove the causality between them. Other than that, there exists confounding factors such as other pollutants can effect the models and results established in the analysis. Whether the effect of PM2.5 on stock volatility is temporary or permanent is not examined. As described in the previous section, a significant amount of metro data are estimated. All of the results are made under bias including data error.
+Although we found a link between the daily concentration of PM2.5 and the daily stock return, we did not prove the causality between them. Other than that, there exists confounding factors such as other pollutants can effect the models and results established in the analysis. Whether the effect of PM2.5 on stock volatility is temporary or permanent is not examined. As described in the previous section, a significant amount of metro data are estimated. All of the results are made under potential bias including data error. More accurate and informative data are required to make a stonger conclution.
 
 \newpage
 
