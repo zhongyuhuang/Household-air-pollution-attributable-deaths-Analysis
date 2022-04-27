@@ -105,6 +105,7 @@ Regression models for each city are performed individually. The estimated coeffi
 ```{r bills5, fig.cap="Regression coefficients and 95% confidence intervals for 47 cities", echo = FALSE, fig.height=36, fig.width=32}
 # add figure
 include_graphics(here::here("inputs/data/im.jpg"))
+
 ```
 
 # Discussion
@@ -129,9 +130,120 @@ Although we found a link between the daily concentration of PM2.5 and the daily 
 
 # Appendix {-}
 
+## Model Card
 
-# Additional details
+• Model Details. Basic information about the model.
 
+- Person or organization developing model
+
+  Simo-Pekka Kiihamäki, Marko Korhonen & Jouni J. K. Jaakkola
+
+- Model date
+
+  21 April 2021
+
+- Model version
+
+  2
+
+- Model type
+
+  Linear regression model
+
+- Paper or other resource for more information
+
+  "Ambient particulate air pollution and daily stock market returns and volatility in 47 cities worldwide"
+
+- Citation details
+
+  Kiihamäki, SP., Korhonen, M. & Jaakkola, J.J.K. Ambient particulate air pollution and daily stock market returns and volatility in 47 cities worldwide. Sci Rep 11, 8628 (2021). https://doi.org/10.1038/s41598-021-88041-w
+
+- License
+
+  Creative Commons Attribution 4.0 International License
+
+- Where to send questions or comments about the model
+
+  contact original authors of the paper "Ambient particulate air pollution and daily stock market returns and volatility in 47 cities worldwide."
+
+• Intended Use. Use cases that were envisioned during development.
+
+- Primary intended uses
+
+  used to examine relationships between concentration of PM2.5 and dailt stock returns for 47 cities.
+
+- Primary intended users
+
+  Simo-Pekka Kiihamäki, Marko Korhonen & Jouni J. K. Jaakkola
+
+- Out-of-scope use cases
+
+  Not applicable
+
+• Factors. 
+
+- Relevant factors
+
+  The foreseeable salient factors for which model performance may vary includes the accuracy of the dataset.
+
+- Evaluation factors
+
+  Traffic emissions are treated as confounding factors to adjust the model.
+
+• Metrics. Metrics should be chosen to reflect potential realworld impacts of the model.
+
+- Model performance measures
+
+  Not applicable
+
+- Decision thresholds
+
+  Not applicable
+
+- Variation approaches
+
+  Approaches including confidence intervals
+
+• Evaluation Data. Details on the dataset(s) used for the
+quantitative analyses in the card.
+
+- Datasets
+
+  Datasets used to evaluate the model were produced by the original authors,
+
+- Motivation
+
+  These datasets obtain air pollution data, stock returns data, and meteorological data which are needed to run the model.
+
+- Preprocessing
+
+  Omitted and imputed missing values.
+
+• Training Data. May not be possible to provide in practice.
+When possible, this section should mirror Evaluation Data.
+If such detail is not possible, minimal allowable information
+should be provided here, such as details of the distribution
+over various factors in the training datasets.
+
+  Not applicable
+
+• Quantitative Analyses
+
+- Unitary results
+
+  The summary effect estimate for PM2.5 based on 47 city specific estimates is -0.012 (95% confidence interval -0.021, -0.003), which is statistically significant at the 5% level.
+
+- Intersectional results
+
+  Not applicable
+
+• Ethical Considerations
+
+  The model did not use any sensitive data. The model did not intended to inform decisions about matters central to human life or flourishing. No risk mitigation strategies were used during model development. Risks present in model usage remain unknown.
+
+• Caveats and Recommendations
+
+  The ideal characteristics of an evaluation dataset for this model would be complete data for air pollution, stock returns, and meteorology from reliable sources.
 
 \newpage
 

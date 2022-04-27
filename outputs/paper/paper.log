@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.4.6)  27 APR 2022 18:35
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.4.6)  27 APR 2022 19:29
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -501,23 +501,23 @@ File: ../../inputs/data/im.jpg Graphic file (type jpg)
 <use ../../inputs/data/im.jpg>
 Package pdftex.def Info: ../../inputs/data/im.jpg  used on input line 180.
 (pdftex.def)             Requested size: 182.6876pt x 304.64665pt.
-[5] [6 <../../inputs/data/im.jpg>] [7] [8] [9] (./paper.aux)
+[5] [6 <../../inputs/data/im.jpg>] [7] [8] [9] [10] (./paper.aux)
 Package rerunfilecheck Info: File `paper.out' has not changed.
-(rerunfilecheck)             Checksum: 7F1A7B5B48ECC61D5CA6C97C67133805;1910.
+(rerunfilecheck)             Checksum: 1FA4C4D46722553B9569CDA84EDED8DF;1888.
  ) 
 Here is how much of TeX's memory you used:
- 11265 strings out of 480228
- 176540 string characters out of 5893579
- 469758 words of memory out of 5000000
+ 11266 strings out of 480228
+ 176547 string characters out of 5893579
+ 469766 words of memory out of 5000000
  28972 multiletter control sequences out of 15000+600000
  532926 words of font info for 78 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 60i,6n,63p,1360b,331s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 60i,6n,63p,1360b,391s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {c:/Users/Zoey/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{c:/Users/Zoey/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{c:/Users/Zoey/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}{c:/Users/Zoey/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{c:/Users/Zoey/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}<c:/Users/Zoey/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb><c:/Users/Zoey/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx9.pfb><c:/Users/Zoey/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb><c:/Users/Zoey/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi7.pfb><c:/Users/Zoey/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb><c:/Users/Zoey/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb><c:/Users/Zoey/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb><c:/Users/Zoey/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr6.pfb><c:/Users/Zoey/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb><c:/Users/Zoey/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb><c:/Users/Zoey/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr9.pfb><c:/Users/Zoey/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri10.pfb><c:/Users/Zoey/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb>
-Output written on paper.pdf (9 pages, 633601 bytes).
+Output written on paper.pdf (10 pages, 637105 bytes).
 PDF statistics:
- 255 PDF objects out of 1000 (max. 8388607)
- 207 compressed objects within 3 object streams
- 51 named destinations out of 1000 (max. 500000)
+ 261 PDF objects out of 1000 (max. 8388607)
+ 212 compressed objects within 3 object streams
+ 52 named destinations out of 1000 (max. 500000)
  128 words of extra memory for PDF output out of 10000 (max. 10000000)
 
