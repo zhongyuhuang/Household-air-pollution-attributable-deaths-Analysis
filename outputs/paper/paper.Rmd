@@ -1,10 +1,11 @@
 ---
-title: "Agriculture and combustion, are two major sources of particular matter(PM2.5) that are associated with premature deaths in Canada"
+title: "Impacts of air pollution on investors' moods"
+subtitle: "Replicating ‘Ambient particulate air pollution and daily stock market returns and volatility in 47 cities worldwide'"
 author: 
   - Zhongyu Huang
-thanks: "Code and data are available at: https://github.com/zhongyuhuang/Household-air-pollution-attributable-deaths-Analysis.git"
-date: "April 6, 2022"
-abstract: "The silent killer, PM2.5, was ranked the fifth risk factor for cardiovascular disease and lung cancer. Approximately 4.5 million individuals died due to exposure to PM2.5 globally every year. This report aims to model and predict the trend of premature deaths resulting from PM2.5 in Canada by using the linear regression model. The results indicate that the number of premature deaths can be explained by man-made emissions from agriculture and combustion. Increasing emissions from these two sources are significantly related to increases in deaths."
+thanks: "Code and data are available at: https://github.com/zhongyuhuang/Impacts-of-air-pollution-on-investors-moods.git"
+date: "April 27, 2022"
+abstract: "The silent killer, air pollution, can cause not only health issues but psychological and economic effects. This paper replicates the 2021 article ‘Ambient particulate air pollution and daily stock market returns and volatility in 47 cities worldwide', and uses the results as evidence to examine the non-health effects of air pollution. Models in the article have shown that the daily stock returns decrease by 1.2% on average globally as PM2.5 concentration increases by 10 microgram per cubic metre. This analysis provides substantial evidence that air pollution might affect human behavior.\\par\\textbf{Keywords:} Environmental Economics, Ambient Particular Air Pollution, Stock Price, PM2.5"
 output:
   bookdown::pdf_document2
 toc: FALSE
@@ -12,156 +13,169 @@ bibliography: references.bib
 ---
 
 ```{r setup, include=FALSE}
+# setup and load data
 knitr::opts_chunk$set(echo = TRUE)
-library(modelsummary)
 library(tidyverse)
+library(modelsummary)
 library(ggplot2)
 library(car)
 library(dplyr)
+library(gridExtra)
+library(lmtest)
+library(sandwich)
+library(formattable)
+library(zoo)
+library(rmeta)
+library(mgcv)
+library(stringr)
+library(metafor)
+library(rugarch)
+library(sf)
+library(rnaturalearth)
+library(rnaturalearthdata)
+library(ggspatial)
+library(geosphere)
 f <- file.choose()
-APD <- read.csv(f)
+AS <- read.csv(f)
+f2 <- file.choose()
+metadata <- read.csv(f2)
 ```
 
 # Introduction
 
-     In recent years, extreme pollution events bring people's attention to studying the health concerns due to air pollution. The government of Canada reported that an estimated 15,300 premature deaths are linked to air pollution every year (Government of Canada, 2021). That is, approximately 5% of the total number of deaths reported in 2020. Exposure to pollutants such as nitrogen oxides (NOX) or sulfur oxides (SOX) can cause serious health issues including damaging lung function(Government of Canada, 2021). As the main component of smog, fine particulate matter and ground-level ozone (O3) can cause dysfunction of the eye, nose, throat, or lung(Government of Canada, 2021). Fine particulate matter has been identified as one of the risk factors for cardiovascular disease and premature death(Government of Canada, 2021). Other pollutants such as Carbon monoxide (CO) and Ammonia (NH3) are also harmful to human health(Government of Canada, 2021). Most of them are colorless gas to be not noticed. The vulnerable group, children and the elderly, can be harmed more easily at greater risk(Government of Canada, 2021).
+  In recent years, extreme pollution events bring people's attention to studying the impacts due to air pollution. Exposure to pollutants such as nitrogen oxides (NOX) or sulfur oxides (SOX) can cause serious health issues including damaging lung function(Government of Canada, 2021). As the main component of smog, fine particulate matter and ground-level ozone (O3) can cause dysfunction of the eye, nose, throat, or lung(Government of Canada, 2021). Fine particulate matter has been identified as one of the risk factors for cardiovascular disease and premature death(Government of Canada, 2021). Other pollutants such as Carbon monoxide (CO) and Ammonia (NH3) are also harmful to human health(Government of Canada, 2021). Most of them are colorless gas to be not noticed. The vulnerable group, children and the elderly, can be harmed more easily at greater risk(Government of Canada, 2021). In addition, indirect evidence was found to explain how air pollution influences mood and human cognitive functions.
    
-     This paper aims to predict the premature death toll from the composition of PM2.5 emissions from different sources by building a meaningful linear regression model. The data used here are collected by the organization for Economic Co-operation and Development. The dataset stores information about man-made emissions of PM2.5 by different pollutants and the related death toll in Canada from 2005 to 2019 (OECD,2018). We tried to explain the number of death by related factors. With such a model, it should be clear to determine pollutant sources that are significantly related to premature death. It can also be used to provide directions on how to reduce or avoid air pollution, specifically, reduce the emission of PM2.5.
+  The article 'Ambient particulate air pollution and daily stock market returns and volatility in 47 cities worldwide' by Simo Kiihamäki, Marko Korhonen, and Jouni Jaakkola investigates how daily concentrations of fine particulate matter influence daily stock market returns and volatility. They aim to test two hypotheses. The first is that the increases in the daily PM2.5 concentrations decrease daily stock returns. The second is that the increases in daily PM2.5 concentrations increase daily stock volatility. Linear models and meta-regression analysis are performed to generate results at the global level. Evidence from regression models for each city supports that short-term exposure to PM2.5 could lead to a decrease in stock returns.
+  
+  This paper replicates the original analysis in the article by using the dataset provided by the authors. Data related to air pollution data, stock index, and meteorology are provided in the dataset. The dataset will be introduced and explained in more detail first in the Data section. Their methods will be explored in the Results section. Regression models created in the original analysis will be replicated while additional models are produced and explored. Results and discussion will be presented in the end.
    
-     Interestingly, the number of death decreased while the total man-made emissions increased in these 13 years. This can be probably explained by the development of medicine. The results have shown that emissions of PM2.5 from agriculture, combustion, and miscellaneous are statistically significantly linearly related to the death resulting from exposures to PM2.5. More specifically, the model can be expressed as - $\text{Premature death} = 7.2419131 + 0.0037454 * \text{Emissions from Agriculture} + (-0.0011323)*\text{Miscellaneous emissions} + 0.0003403* \text{Emissions from Combustion} + \epsilon$. It indicates that a one unit increase in emissions from agriculture would lead to 0.0037454 more death. The unit here for emissions is a thousand tones. It is worth noticing that our model relies on a relatively small dataset which might affect the prediction power of the model. I will introduce the dataset in more detail first, then build and validate the model, and finally discuss the results and limitations.
 
 # Data
 
-Our data is of Air pollution (Figure \@ref(fig:pd)).
+## Data source and collection
 
-```{r pd, fig.cap="Premature deaths caused by fine particulate matter", echo = FALSE}
-#EDA
-ggplot(data=APD, aes(x=Year, y=Premature.deaths)) +geom_point()
-ggplot(data=APD, aes(x=Year, y=Total.man.made.emissions)) +geom_point()
+This paper uses the datasets conducted by Kiihamäki etc. The datasets are available as CSV files from https://data.mendeley.com/datasets/z8t3s8btxv/1. They store air pollution data, stock index data, and meteorological data for 47759 observations from 47 cities worldwide. Daily returns of stocks are collected from investing.com. This website is a financial markets platform offering access to real-time data and free financial tools across 250 exchanges around the world. However, it is worthy to notice that this platform claims that data provided by them is not necessarily by any market or exchange, hence not necessarily real-time nor accurate. Data related to air pollution are collected from various sources including the European Environment Agency, the U.S. Department of State, and so on. Only 47 out of 88 countries have sufficient PM2.5 concentration to be involved in the original analysis. Meteorological data for these countries are obtained from the Global Surface Summary of the Day. It is a product of the National Oceanic and Atmosphere Administration and it possesses averages of daily weather elements computed from global hourly station data.  
 
-for(i in 9:18){
-hist(APD[,i], main=paste0("Histogram of ", names(APD)[i]), xlab=names(APD)[i], cex.main=0.75)
-}
-```
-```{r,include=FALSE, echo=FALSE}
+## Missing Values
 
-APD2 <- APD %>% mutate (Premature.deaths=Premature.deaths+0.5, Waste=Waste+0.5, Agriculture=Agriculture+0.5,Road.Transport=Road.Transport+0.5, Miscellaneous=Miscellaneous+0.5,Power.stations=Power.stations+0.5, Other.Mobile.Sources=Other.Mobile.Sources+0.5, Combustion=Combustion+0.5, Industrial.processes.and.product.use=Industrial.processes.and.product.use+0.5)
+The authors used two technics to deal with missing values in datasets. As for the missing values that exist in either stock data or air pollution data, the authors choose to omit observations from all day if any of the stock returns or PM2.5 concentration is missing. This decision is made based on that it is impractical to find relations in the absence of these data. As for meteorological variables, there exist a large amount of randomly missing data. These variables are served as confounding factors that affect the research question in the original paper. The authors decide to impute these missing values to perform adjustments due to confounders by using classification and regression training. 
 
-APD3<- APD2 %>% select(`Premature.deaths`, Waste, Agriculture, `Road.Transport`, Miscellaneous, `Power.stations` , `Other.Mobile.Sources` , Combustion , `Industrial.processes.and.product.use`)
+## Visualization of variables
 
-APD4 <- APD3 %>% mutate(Premature.deaths = log(Premature.deaths), Power.stations=log(Power.stations))
-Model2 <- lm(Premature.deaths ~ Waste + Agriculture + Road.Transport + Miscellaneous + Power.stations + Other.Mobile.Sources + Combustion + Industrial.processes.and.product.use, data=APD4)
+Most of the observations are from London, Toronto, New York City, Copenhagen, and Helsinki.(Figure \@ref(fig:bill)). They are almost equally distributed each day of the week. The dependent variables here is the logarithmic daily returns. The daily return of stock indicates the dollar change in a stock's price as a percentage of the previous day's closing price. We use the logarithmic daily returns of stock instead the daily return to ensure the normality of the dependent variable. From the plots of explanatory variables, a significant amount of outliers are presented(Figure \@ref(fig:bill2)). It is possible to have problematic observations in the dataset which could affect the further models. Categorical Variables would be transformed to factors in further analysis.
 
-
-Model1 <- lm(Premature.deaths ~ Waste + Agriculture + Road.Transport + Miscellaneous + Power.stations + Other.Mobile.Sources + Combustion + Industrial.processes.and.product.use, data=APD3)
-
-Model3 <- lm(Premature.deaths ~ Waste + Agriculture + Road.Transport + Miscellaneous + Power.stations  + Combustion + Industrial.processes.and.product.use, data=APD4)
-#vif(Model3)
-#summary(Model3)$adj.r.squared
-#summary(Model2)$adj.r.squared
-Model4 <- lm(Premature.deaths ~ Waste + Agriculture  + Miscellaneous + Power.stations  + Combustion + Industrial.processes.and.product.use, data=APD4)
-
-Model6 <- lm(Premature.deaths ~ Waste + Agriculture  + Miscellaneous  + Combustion+  Road.Transport, data=APD4)
-
-Model7 <- lm(Premature.deaths ~  Agriculture  + Miscellaneous + Combustion, data=APD4)
-
-#check condition1 and condition2
-pairs(APD[, -c(1:9,18)])
-plot(APD$Premature.deaths ~ fitted(Model1), main="Y versus Yhat", ylab="response", xlab="yhat")
-abline(a = 0, b = 1)
-lines(APD$Premature.deaths ~ fitted(Model1), lty=2)
-#Transform
-
-boxCox(Model1)
-p <- powerTransform(cbind(APD3[,-c(1,2)]))
-summary(p)
-
-
-
-plot(APD4$Premature.deaths ~ fitted(Model2))
-plot(Model2)
-plot(Model1)
-
-mod1 <- lm(Premature.deaths ~ Waste + Agriculture +Road.Transport+Miscellaneous +Power.stations, data=APD4)
-anova(mod1, Model2)
-plot(resid(mod1) ~ fitted(mod1))
-plot(resid(mod1) ~ APD4$Waste)
-plot(resid(mod1) ~ APD4$Agriculture)
-qqnorm(resid(mod1))
-qqline(resid(mod1))
-
-n <- nrow(APD4)
-p <- length(coef(Model2))-1
-Hcut <- 2*((p+1)/n)
-DFFITScut <- 2*sqrt((p+1)/n)
-DFBETAcut <- 2/sqrt(n)
-Dcut <- qf(0.5, p+1, n-p-1)
-# identify the leverage points
-h <- hatvalues(Model2)
-which(h>Hcut)
-h
-r <- rstandard(Model2)
-which(r < -2 | r > 2)
-
-
-for(i in 9:18){
-boxplot(APD[,i], main=paste0("Boxplot of ", names(APD)[i]), xlab=names(APD)[i]
-, horizontal=T)
-}
-```
-```{r,include=FALSE,echo=FALSE}
-#install.packages("modelsummary")
-
-
-p<-modelsummary(list(Model1,
-                  Model2, 
-                  Model7),
-             fmt = 2,
-             title = "Explaining marathon time based on five-kilometer run times and weather features")
-p
+```{r bill, fig.cap="Cities and days of week of observations", echo = FALSE, fig.height=9}
+#bar plots of city and days of week
+b1 <- ggplot(data=AS, aes(x=dow)) +geom_bar()+xlab("day of week")+ ggtitle("Distribution of days of week")
+b2 <- ggplot(data=AS, aes(x=city)) +geom_bar()+ coord_flip()+ ggtitle("Distribution of cities")
+grid.arrange(b1,b2)
 ```
 
-Talk more about it.
+```{r bill2,echo=FALSE, fig.cap="Visualization of explanatory variables", fig.height=9}
 
-Also bills and their average (Figure \@ref(fig:billssssss)). (Notice how you can change the height and width so they don't take the whole page?)
+# plot explanatory variables
+p1 <- ggplot(data=AS, aes(x=TEMP)) +geom_boxplot()+ggtitle("Temperature")
+p2 <- ggplot(data=AS, aes(x=SLP)) +geom_boxplot()+ggtitle("Sea Level Pressure")
+p3 <- ggplot(data=AS, aes(x=RH)) +geom_boxplot()+ggtitle("Relative humidity") 
+p4 <- ggplot(data=AS, aes(x=VISIB)) +geom_boxplot()+ggtitle("Visibility") 
+p5 <- ggplot(data=AS, aes(x=WDSP)) +geom_boxplot()+ggtitle("Wind speed") 
+p6 <- ggplot(data=AS, aes(x=PRCP)) +geom_boxplot()+ggtitle("Precipitation") 
 
-```{r billssssss, fig.cap="More bills of penguins", echo = FALSE, fig.width=8, fig.height=4}
-
+# arrange plots
+grid.arrange(p1,p2,p3,p4,p5,p6)
 
 ```
-
-Talk way more about it. 
-
 
 
 # Model
+```{r, include=FALSE}
 
-\begin{equation}
-Pr(\theta | y) = \frac{Pr(y | \theta) Pr(\theta)}{Pr(y)}  (\#eq:bayes)
-\end{equation}
+# turn character variable to factors
+AS$temp_bins <- as.factor(AS$temp_bins)
+AS$dewp_bins <- as.factor(AS$dewp_bins)
+AS$woy <- as.factor(AS$woy)
+AS$dow <- as.factor(AS$dow)
 
-Equation \@ref(eq:bayes) seems useful, eh?
+# setup the initial linear model
+model <- formula(log_ret ~ pm25 + lag1_ret + lag2_ret + PRCP + WDSP + SLP + VISIB + temp_bins + dewp_bins + SAD + dow + woy)
 
-Here's a dumb example of how to use some references: In paper we run our analysis in `R` [@citeR]. We also use the `tidyverse` which was written by @thereferencecanbewhatever If we were interested in baseball data then @citeLahman could be useful. 
+# setup required list
+garch_fits <- list()
+lm_fits <- list()
+return_models <- list()
+n <- vector()
+city <- vector()
 
-We can use maths by including latex between dollar signs, for instance $\theta$.
+## make models for all each of the city 
+for (i in unique(AS$city)) {
+
+  data <- AS[AS$city == i, ]
+  data <- data[!is.na(data$lag1_ret), ]
+  data$YDAY <- as.numeric(strftime(data$date, format = "%j"))
+  latitude <- metadata$Latitude[metadata$City == i]
+  data$SAD <- daylength(latitude, data$YDAY)
+  
+  
+  if (nrow(data) > 0) {  
+    
+    # append the n and city vectors
+    n[(length(n) + 1)] <- nrow(data)
+    city[(length(city) + 1)] <- i
+    
+    
+    # data transformations 
+    data$pm25 <- data$pm25/10
+    data$lag1_pm25 <- dplyr::lag(data$pm25, 1)
+    data$lag2_pm25 <- dplyr::lag(data$pm25, 2)
+    data$pm25_01 <- rollmean(data$pm25, 2, fill = NA, align = "right", na.pad = T)
+    data$pm25_02 <- rollmean(data$pm25, 3, fill = NA, align = "right", na.pad = T)
+    
+    
+    # fit the linear model 
+    fit <- lm(formula, data = data, na.action = "na.exclude")
+    return_models[[i]] <- fit
+    
+    # retrieve residuals for the GARCH models
+    data$resid <- residuals(fit)
+    temp_data <- data[!is.na(data$resid), ]
+    
+    # define the gjrGARCH(1,1) model specifications and run
+    spec <- ugarchspec(variance.model = list(model = "gjrGARCH", garchOrder = c(1, 1)), mean.model=list(armaOrder=c(0,0), include.mean=TRUE), distribution.model = "norm")
+    garch_fits[[i]] <- ugarchfit(spec, temp_data$resid)
+    
+    # retrieve predicted volatilities
+    temp_data$vola <- garch_fits[[i]]@fit$sigma
+    
+    # run linear model on the garch volatilities
+    formula2 <- formula(vola ~ pm25 + lag1_ret + lag2_ret + PRCP + WDSP + SLP + VISIB + temp_bins + dewp_bins + SAD + dow + woy)
+    
+    lm_fits[[i]] <- lm(formula2, data = temp_data, na.action = na.exclude)
+    
+    
+  } else {
+     next
+  }
+}
+```
 
 
 # Results
 
 # Discussion
 
-## First discussion point
+## Cleaner air indicates higher stock returns?
 
-If my paper were 10 pages, then should be be at least 2.5 pages. The discussion is a chance to show off what you know and what you learnt from all this. 
+It might be possible for stock returns to be higher when there is no pollution. However, we cannot make such a statement without further investigation. The results shown in the analysis are not necessarily saying "Let's rise the stock return by cleaning the air". Indeed, they indicate that we will see more accurate stock returns and volatility with cleaner air. In this case, the volatility will follow the market fundamentals. A strong relation between air pollution and stock volatility actually indicates the inefficiency of the market.
 
-## Second discussion point
 
-## Third discussion point
+## Other non-health outcomes
+
+Often we could hear discussions on how human behaviors produce or reduce air pollution. It is rare to talk about this topic in the opposite perspective, especially on psychiatric aspect. Only a few researches had examined these effects linked to air pollution. However, evidence had been found to suggest that air pollutants interfere with functioning of the nervous system. Other than that, although the ability to withstand anxiety depends on individual, medical effects of air pollution can indirectly affect psychological health. Research from 2017 had found the relationship between ambient air pollution and increased aggressive behavior in teenagers.
+
 
 ## Weaknesses and next steps
 
-Weaknesses and next steps should also be included.
+Although we found a link between the daily concentration of PM2.5 and the daily stock return, we did not prove the causality between them. Other than that, there exists confounding factors such as other pollutants can effect the models and results established in the analysis. Whether the effect of PM2.5 on stock volatility is temporary or permanent is not examined. As described in the previous section, a significant amount of metro data are estimated. All of the results are made under bias including data error.
 
 \newpage
 
@@ -178,4 +192,7 @@ Weaknesses and next steps should also be included.
 
 # References
 
-
+---
+nocite: |
+  @citeR, @thereferencecanbewhatever, @citeLahman
+---
