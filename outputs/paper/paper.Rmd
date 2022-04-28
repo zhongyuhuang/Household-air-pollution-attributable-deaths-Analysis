@@ -90,6 +90,98 @@ grid.arrange(p1,p2,p3,p4,p5,p6)
 \newpage
 # Model
 
+```{r}
+# transform character variables to factors
+masterdata$temp_bins <- as.factor(masterdata$temp_bins)
+masterdata$dewp_bins <- as.factor(masterdata$dewp_bins)
+masterdata$woy <- as.factor(masterdata$woy)
+masterdata$dow <- as.factor(masterdata$dow)
+
+# setup the equation
+formula <- formula(log_ret ~ pm25 + lag1_ret + lag2_ret + PRCP + WDSP + SLP + VISIB + temp_bins + dewp_bins + SAD + dow + woy)
+
+# setup needed list
+garch_fits <- list()
+lm_fits <- list()
+return_models <- list()
+n <- vector()
+city <- vector()
+
+# make the loop for building models for all cities
+for (i in unique(AS$city)) {
+
+  data <- AS[AS$city == i, ]
+  data <- AS[AS$city == i, ]
+  data <- data[!is.na(data$lag1_ret), ]
+  data$YDAY <- as.numeric(strftime(data$date, format = "%j"))
+  latitude <- metadata$Latitude[metadata$City == i]
+  data$SAD <- daylength(latitude, data$YDAY)
+  
+  
+  if (nrow(data) > 0) {  
+    
+    # append the n and city vectors
+    n[(length(n) + 1)] <- nrow(data)
+    city[(length(city) + 1)] <- i
+    
+    
+    # data transformations 
+    data$pm25 <- data$pm25/10
+    data$lag1_pm25 <- dplyr::lag(data$pm25, 1)
+    data$lag2_pm25 <- dplyr::lag(data$pm25, 2)
+    data$pm25_01 <- rollmean(data$pm25, 2, fill = NA, align = "right", na.pad = T)
+    data$pm25_02 <- rollmean(data$pm25, 3, fill = NA, align = "right", na.pad = T)
+    
+    
+    # fit the linear model 
+    fit <- lm(formula, data = data, na.action = "na.exclude")
+    return_models[[i]] <- fit
+    
+    # retrieve residuals for the GARCH models
+    data$resid <- residuals(fit)
+    temp_data <- data[!is.na(data$resid), ]
+    
+    # define the gjrGARCH(1,1) model specifications and run
+    spec <- ugarchspec(variance.model = list(model = "gjrGARCH", garchOrder = c(1, 1)), mean.model=list(armaOrder=c(0,0), include.mean=TRUE), distribution.model = "norm")
+    garch_fits[[i]] <- ugarchfit(spec, temp_data$resid)
+    
+    # retrieve predicted volatilities
+    temp_data$vola <- garch_fits[[i]]@fit$sigma
+    
+    # run linear model on the garch volatilities
+    formula2 <- formula(vola ~ pm25 + lag1_ret + lag2_ret + PRCP + WDSP + SLP + VISIB + temp_bins + dewp_bins + SAD + dow + woy)
+    
+    lm_fits[[i]] <- lm(formula2, data = temp_data, na.action = na.exclude)
+    
+    
+  } else {
+    next
+  }
+}
+
+# summarize regression coefficient
+return_estimates <- data.frame()
+for (i in 1:length(return_models)){
+  tryCatch({
+    cf <- quiet(coeftest(return_models[[i]],vcov.=NeweyWest(return_models[[i]], prewhite = F, verbose = T))) 
+    # apply NeweyWest standard errors
+    p <- round(cf[,4], 4) 
+    est <- round(cf[,1], 6)
+    est <- sprintf("%.4f",est)
+    temp <- ifelse(p < 0.10, paste(est, "*", sep = ""), paste(est))
+    temp <- ifelse(p < 0.05, paste(temp, "*", sep = ""), paste(temp))
+    temp <- ifelse(p < 0.01, paste(temp, "*", sep = ""), paste(temp))
+    return_estimates <- bind_rows(return_estimates, temp)
+  }, error=function(e){cat("ERROR :",i, "\n")}) 
+  ## print out errors - used when testing with variables where certain cities would not converge
+}
+
+# filter out discreet variables and print out as formattable table
+return_estimates <- cbind(city, return_estimates)
+return_estimates <- return_estimates[,c(1, 3:9)]
+formattable(return_estimates)
+
+```
 
 In this paper, only the stock return model has been replicated. Here, the stock return is defined as: - $RET_t = (ln(P_t)-ln(P_t-1)*100$  , where Pt is the closing price of the city’s corresponding stock index on day t. The complete model is:
 
